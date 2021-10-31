@@ -25,9 +25,9 @@ parser.add_argument('--iterations', help='number of iterations in game')
 parser.add_argument('--last_opponent_move', help='last opponent move')
 args = parser.parse_args()
 
-myfile = open("dictData.json")
+outfile = open('dictData.json', 'x')
 
-data = json.load(myfile)
+data = json.load(outfile)
 
 if args.init == "true":
     data["queue"] = ["Confess", "Silence", "Silence", "Confess"]  
@@ -44,6 +44,6 @@ else: #Every round besides first
         print(data["queue"].pop(0))
         data["queue"].append(args.last_opponent_move)
         data["iterations"]+=1 
-with open("dictData.json", "w") as f:
+with open("dictData.json", "r+") as f:
     json.dump(data, f)
 
