@@ -35,9 +35,12 @@ if __name__ == "__main__":
     parser.add_argument('--last_opponent_move', help='last opponent move')
     args = parser.parse_args()
     iterations = args.iterations #total amount of iterations given
+    if(args.init != None):
+        with open('dictData.txt', 'w') as fp:
+            pass
     if(args.last_opponent_move == 0): #First round
       data = {}
-      data["queue"] = ["Silence"]*4 
+      data["queue"] = ["Confess", "Silence", "Silence", "Confess"] 
       data["iterations"] =  1
       save_state(data)    
     else: #Every round besides first
