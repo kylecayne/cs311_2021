@@ -1,5 +1,6 @@
 import json
 import argparse
+import array
 """"
 Algorithm:
 1)On first round enemy move is 0:
