@@ -24,7 +24,7 @@ for f in fork_list:
     os.system(exec_me)
 
     try:
-        with open(f"{PULL_DIR}/{f['github_user']}/assignment3/runme.tx", "r") as runtxt:
+        with open(f"{PULL_DIR}/{f['github_user']}/assignment3/runme.txt", "r") as runtxt:
             players.append({"player" : f"{f['github_user']}", "runtxt" : runtxt.read()})
     except:
         print(f"!!!!!!!!!!! Player {f['github_user']} did not load!!!!!!")
