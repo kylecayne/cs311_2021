@@ -38,7 +38,6 @@ if __name__ == "__main__":
     if(args.init != None):
         with open('dictData.txt', 'w') as fp:
             json.dump({}, fp)
-        return
     if(args.last_opponent_move == 0): #First round
       data = {}
       data["queue"] = ["Confess", "Silence", "Silence", "Confess"] 
