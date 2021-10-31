@@ -37,15 +37,20 @@ if __name__ == "__main__":
     iterations = args.iterations #total amount of iterations given
     if(args.init != None):
         with open('dictData.txt', 'w') as fp:
-            json.dump({}, fp)
-    if(args.last_opponent_move == 0): #First round
-      data = {}
+            data = {}
+            data["queue"] = [] 
+            data["iterations"] =  0
+            data["final"] = args.iterations
+            json.dump(data, fp)
+            exit(0)
+    elif(args.last_opponent_move == 0): #First round
+      data = load_state()
       data["queue"] = ["Confess", "Silence", "Silence", "Confess"] 
       data["iterations"] =  1
       save_state(data)    
     else: #Every round besides first
       data = load_state()
-      if(data["iterations"]==args.iterations):#Final round
+      if(data["iterations"]==data["final"]):#Final round
         print("Confess")
         exit(0)
       else:#Normal Round  
