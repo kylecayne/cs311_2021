@@ -45,6 +45,6 @@ else: #Every round besides first
         print(data["queue"].pop(0))
         data["queue"].append(args.last_opponent_move)
         data["iterations"]+=1 
-with open("dictData.json", "w") as myfile:
-    json.dump(data, myfile)
+with open("dictData.json", "w") as f:
+    json.dump(data, f)
 
