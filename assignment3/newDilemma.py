@@ -25,7 +25,7 @@ parser.add_argument('--iterations', help='number of iterations in game')
 parser.add_argument('--last_opponent_move', help='last opponent move')
 args = parser.parse_args()
 
-f = open('dictData.json', 'x')
+f = open('dictData.json', 'a+')
 
 data = json.load(f)
 
