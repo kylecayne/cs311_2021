@@ -37,7 +37,7 @@ if __name__ == "__main__":
     iterations = args.iterations #total amount of iterations given
     if(args.init != None):
         with open('dictData.txt', 'w') as fp:
-            pass
+            json.dump({}, fp)
     if(args.last_opponent_move == 0): #First round
       data = {}
       data["queue"] = ["Confess", "Silence", "Silence", "Confess"] 
