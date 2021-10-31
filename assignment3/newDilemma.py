@@ -27,24 +27,24 @@ if __name__ == "__main__":
     args = parser.parse_args()
     iterations = args.iterations #total amount of iterations given
     try:
-      with open('dictData.txt', "r+") as file:
+      with open('dictData.txt', "r+") as myfile:
         if(args.init != None):
           data = {}
           data["queue"] = [] 
           data["iterations"] =  0
           data["final"] = args.iterations
-          json.dump(data, file)
-          file.close()
+          json.dump(data, myfile)
+          myfile.close()
           exit(0)
         elif(args.last_opponent_move == 0): #First round
-          data = json.load(file)
+          data = json.load(myfile)
           data["queue"] = ["Confess", "Silence", "Silence", "Confess"] 
           data["iterations"] =  1
-          json.dump(data, file)
-          file.close()
+          json.dump(data, myfile)
+          myfile.close()
           exit(0)
         else: #Every round besides first
-          data = json.load(file)
+          data = json.load(myfile)
           if(data["iterations"]==data["final"]):#Final round
             print("Confess")
             exit(0)
@@ -52,8 +52,8 @@ if __name__ == "__main__":
             print(data["queue"].pop(0))
             data["queue"].append(args.last_opponent_move)
             data["iterations"]+=1 
-            json.dump(data, file)
-            file.close()
+            json.dump(data, myfile)
+            myfile.close()
             exit(0)
     except:
       print("something went wrong")   
