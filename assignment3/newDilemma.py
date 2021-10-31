@@ -28,15 +28,14 @@ myfile = open("dictData.json")
 
 data = json.load(myfile)
 
-if(args.init != None):
+if args.init == "true":
     data = {}
-    data["queue"] = [] 
+    data["queue"] = ["Confess", "Silence", "Silence", "Confess"]  
     data["iterations"] =  0
     data["final"] = args.iterations
 elif(args.last_opponent_move == 0): #First round
-    data = json.load(myfile)
-    data["queue"] = ["Confess", "Silence", "Silence", "Confess"] 
     data["iterations"] =  1
+    print(data["queue"][0]) 
 else: #Every round besides first
     data = json.load(myfile)
     if(data["iterations"]==data["final"]):#Final round
