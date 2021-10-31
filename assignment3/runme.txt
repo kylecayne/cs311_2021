@@ -1,1 +1,1 @@
-python dilemma.py
+python newDilemma.py
