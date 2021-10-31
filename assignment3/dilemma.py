@@ -23,6 +23,7 @@ def save_state(data):
   """Saves data into a file"""
   with open('dictData.txt', 'w') as file:
     json.dump(data, file)
+    file.close()
 def load_state():
   """Loads data from a file"""
   with open('dictData.txt', 'r') as file:
@@ -42,6 +43,7 @@ if __name__ == "__main__":
             data["iterations"] =  0
             data["final"] = args.iterations
             json.dump(data, fp)
+            fp.close()
             exit(0)
     elif(args.last_opponent_move == 0): #First round
       data = load_state()
