@@ -33,7 +33,7 @@ if args.init == "true":
     data["queue"] = ["Confess", "Silence", "Silence", "Confess"]  
     data["iterations"] =  0
     data["final"] = args.iterations
-elif(args.last_opponent_move == 0): #First round
+elif(args.last_opponent_move == "zero"): #First round
     data["iterations"] =  1
     print(data["queue"][0]) 
 else: #Every round besides first
