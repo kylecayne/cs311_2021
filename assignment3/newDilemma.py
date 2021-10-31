@@ -18,36 +18,33 @@ Algorithm:
     print confess and exit
       dont worry about saving data or iterating
 """
-if __name__ == "__main__":
-#Setting up the parser and arguments 
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--init', help='called when new game')
-    parser.add_argument('--iterations', help='number of iterations in game')
-    parser.add_argument('--last_opponent_move', help='last opponent move')
-    args = parser.parse_args()
-    iterations = args.iterations #total amount of iterations given
-    with open('dictData.txt', "r+") as myfile:
-        if(args.init != None):
-            data = {}
-            data["queue"] = [] 
-            data["iterations"] =  0
-            data["final"] = args.iterations
-            json.dump(data, myfile)
-            myfile.close()
-        elif(args.last_opponent_move == 0): #First round
-            data = json.load(myfile)
-            data["queue"] = ["Confess", "Silence", "Silence", "Confess"] 
-            data["iterations"] =  1
-            json.dump(data, myfile)
-            myfile.close()
-        else: #Every round besides first
-            data = json.load(myfile)
-            if(data["iterations"]==data["final"]):#Final round
-                print("Confess")
-            else:#Normal Round  
-                print(data["queue"].pop(0))
-                data["queue"].append(args.last_opponent_move)
-                data["iterations"]+=1 
-                json.dump(data, myfile)
-                myfile.close()
+parser = argparse.ArgumentParser()
+parser.add_argument('--init', help='called when new game')
+parser.add_argument('--iterations', help='number of iterations in game')
+parser.add_argument('--last_opponent_move', help='last opponent move')
+args = parser.parse_args()
+
+myfile = open("dictData.json")
+
+data = json.load(myfile)
+
+if(args.init != None):
+    data = {}
+    data["queue"] = [] 
+    data["iterations"] =  0
+    data["final"] = args.iterations
+elif(args.last_opponent_move == 0): #First round
+    data = json.load(myfile)
+    data["queue"] = ["Confess", "Silence", "Silence", "Confess"] 
+    data["iterations"] =  1
+else: #Every round besides first
+    data = json.load(myfile)
+    if(data["iterations"]==data["final"]):#Final round
+        print("Confess")
+    else:#Normal Round  
+        print(data["queue"].pop(0))
+        data["queue"].append(args.last_opponent_move)
+        data["iterations"]+=1 
+with open("dictData.json", "w") as myfile:
+    json.dump(data, myfile)
 
