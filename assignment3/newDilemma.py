@@ -30,7 +30,6 @@ myfile = open("dictData.json")
 data = json.load(myfile)
 
 if args.init == "true":
-    data = {}
     data["queue"] = ["Confess", "Silence", "Silence", "Confess"]  
     data["iterations"] =  0
     data["final"] = args.iterations
