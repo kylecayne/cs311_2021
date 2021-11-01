@@ -1,6 +1,5 @@
-import json
 import argparse
-import array
+import json
 """"
 Algorithm:
 1)On first round enemy move is 0:
@@ -19,26 +18,28 @@ Algorithm:
     print confess and exit
       dont worry about saving data or iterating
 """
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--init', help='called when new game')
 parser.add_argument('--iterations', help='number of iterations in game')
 parser.add_argument('--last_opponent_move', help='last opponent move')
+
 args = parser.parse_args()
 
-myfile = open("info.json", "a+")
 
-data = json.load(myfile)
+info = open("info.json")
+data = json.load(info)
 
-if args.init == "true":
-    data["queue"] = ["Confess", "Silence", "Silence", "Confess"]  
+if (args.init == "true"):
+    data["queue"] = ["confess", "confess", "confess", "confess"]  
     data["iterations"] =  0
     data["final"] = args.iterations
 elif(args.last_opponent_move == "zero"): #First round
     data["iterations"] =  1
-    print(data["queue"][0]) 
+    print("confess") 
 else: #Every round besides first
     if(data["iterations"]==data["final"]):#Final round
-        print("Confess")
+        print("confess")
     else:#Normal Round  
         print(data["queue"].pop(0))
         data["queue"].append(args.last_opponent_move)
