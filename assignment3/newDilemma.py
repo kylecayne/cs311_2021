@@ -37,7 +37,6 @@ elif(args.last_opponent_move == "zero"): #First round
     data["iterations"] =  1
     print(data["queue"][0]) 
 else: #Every round besides first
-    data = json.load(myfile)
     if(data["iterations"]==data["final"]):#Final round
         print("Confess")
     else:#Normal Round  
