@@ -18,19 +18,20 @@ Algorithm:
     print confess and exit
       dont worry about saving data or iterating
 """
-
+#Parser arguments
 parser = argparse.ArgumentParser()
 parser.add_argument('--init', help='called when new game')
 parser.add_argument('--iterations', help='number of iterations in game')
 parser.add_argument('--last_opponent_move', help='last opponent move')
-
+#Asggining variables parsed arguments
 args = parser.parse_args()
 
-
+#opening file json file
 info = open("info.json")
+#loading hasthable 
 data = json.load(info)
 
-if (args.init == "true"):
+if (args.init == "true"):#If game is initialized
     data["queue"] = ["confess", "confess", "confess", "confess"]  
     data["iterations"] =  0
     data["final"] = args.iterations
@@ -44,6 +45,7 @@ else: #Every round besides first
         print(data["queue"].pop(0))
         data["queue"].append(args.last_opponent_move)
         data["iterations"]+=1 
-with open("info.json", "w") as outfile:
+#dump table to file
+with open("info.json", "w") as outfile: 
     json.dump(data, outfile)
 
