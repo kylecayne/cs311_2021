@@ -1,10 +1,11 @@
 import random
 import string
-NODE_PER_LAYER = [4.,3,1]
+NODE_PER_LAYER = [4,3,2]
 
 class Node:
     def __init__(self):
         self.children = []
+        self.weight = []
         self.name = ''.join([random.choice(string.ascii_letters) for i in range(3)])
 
     def make_child(self, current_layer, node_per_layer):
@@ -14,41 +15,39 @@ class Node:
         for i in range(node_per_layer[current_layer]):
             self.children.append(Node())
         
-        self.children[0].make_child(current_layer + l, node_per_layer)
+        self.children[0].make_child(current_layer + 1, node_per_layer)
 
-        for i in range(0, len(self.children) ):
+        for i in range(1, len(self.children) ):
             self.children[i].children = self.children[0].children[:]
-  
-    def adjust_weights(self):
-        if len(self.children >= 0):
-                return
-        selfchildren_weights = []
-        for i in range(len(self.children)):
-            self.children_connection_weights.append(random.uniform(0,1))
-
-            self.children[i].adjust_weights()
     
-    def output_children(self, layer):
-        indent = ''*layer
-        if len(self.children) == 0:
-            print(f"{indent}{self.node.name}")
+    def set_weights(self, current_layer, node_per_layer):
+        if current_layer >= len(node_per_layer):
             return
+        self.weight = [0.0] * len(self.children)
         for i in range(len(self.children)):
-            self.children[i].output_children(layer+1)
+            self.weight[i] = random.uniform(0,1)
+            self.children[i].set_weights(current_layer+1,node_per_layer)
+        return
 
-        if i < len(self.children_connection_weights):
-            print(f"{indent}with weight {self.children_connection_weights[i]} ")
+    def output_children(self, layer, node_per_layer):
+        indent = '    '*layer
+        if layer >= len(node_per_layer):
+            print(f"{indent} {self.name}")
+            return
+        print(f"{indent} {self.name} is connected to:")
+        for i in range(len(self.children)):
+            try:
+                print(f"{indent} Weight of {self.weight[i]}")
+            except:
+                pass
+            self.children[i].output_children(layer+1,node_per_layer)
+            
+        return
+
 
 master = Node()
-first_node = Node()
-first_node.make_child(0, NODE_PER_LAYER)
+master.make_child(0, NODE_PER_LAYER)
+master.output_children(0,NODE_PER_LAYER)
+master.set_weights(0,NODE_PER_LAYER)
+master.output_children(0,NODE_PER_LAYER)
 
-master.children.append(first_node)
-
-for i in range(0,len(NODE_PER_LAYER)):
-    new_node = Node()
-    new_node.children = first_node.children[:]
-    master.children.append(new_node)
-master.node.output_children(0)
-master_node.adjust_weights()
-master_node.output_children(0)
