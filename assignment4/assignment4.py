@@ -1,6 +1,6 @@
 import random
 import string
-NODE_PER_LAYER = [4.,3,1]
+NODE_PER_LAYER = [4,3,2]
 
 class Node:
     def __init__(self):
